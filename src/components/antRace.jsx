@@ -43,7 +43,8 @@ export default class AntRace extends React.Component {
         if (antOddsCalculatedCount === Object.keys(this.state.ants).length) {
           newState.calculated = true;
           newState.calculating = false;
-          newState.calculated = 'Odds are calculated!';
+          newState.message = 'Odds are calculated!';
+          console.log(newState);
         }
         this.setState(newState);
       };
@@ -52,7 +53,7 @@ export default class AntRace extends React.Component {
   }
 
   generateAntWinLikelihoodCalculator() {
-    var delay = 7000 + Math.random()*7000;
+    var delay = 1000 + Math.random()*7000;
     var likelihoodOfAntWinning = Math.random();
     return function(callback) {
       setTimeout(function() {
@@ -66,7 +67,7 @@ export default class AntRace extends React.Component {
       let odds = this.state.ants[idx].winLikelihood;
       return (
         <li key={idx}>
-          <p key="name"> name: {this.state.ants[idx].name}</p>
+          <h2 className="ant-name" key="name">{this.state.ants[idx].name}</h2>
           <p key="length"> length: {this.state.ants[idx].length}mm</p>
           <p key="weight"> weight: {this.state.ants[idx].weight}mg</p>
           <p key="color"> color: {this.state.ants[idx].color.toLowerCase()}</p>
@@ -78,8 +79,8 @@ export default class AntRace extends React.Component {
 
     return (
       <div>
-        <button onClick={this.calculateOdds}>
-          checking out the endpoint
+        <button className="calculate-button" onClick={this.calculateOdds}>
+          calculate odds
         </button>
         <ul>
           { antsList }
