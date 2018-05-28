@@ -10,7 +10,6 @@ export default class AntRace extends React.Component {
       calculating: false,
       message: ''
     }
-  //  this.calculateOdds = this.calculateOdds.bind(this);
   }
 
   componentDidMount() {
@@ -34,11 +33,12 @@ export default class AntRace extends React.Component {
       calculating: true,
       message: 'Calcuating Odds!'
     });
+    console.log(this.state);
     let antOddsCalculatedCount = 0;
     Object.keys(this.state.ants).forEach((ant, idx) => {
-      const callback = (winLikelihood) => {
+      const callback = (likelihoodOfAntWinning) => {
         const newState = merge({}, this.state);
-        newState.ants[ant].winLikelihood = winLikelihood;
+        newState.ants[ant].winLikelihood = likelihoodOfAntWinning;
         antOddsCalculatedCount++;
         if (antOddsCalculatedCount === Object.keys(this.state.ants).length) {
           newState.calculated = true;
@@ -46,7 +46,8 @@ export default class AntRace extends React.Component {
           newState.calculated = 'Odds are calculated!';
         }
         this.setState(newState);
-      }
+      };
+      this.generateAntWinLikelihoodCalculator()(callback);
     })
   }
 
@@ -69,7 +70,7 @@ export default class AntRace extends React.Component {
           <p key="length"> length: {this.state.ants[idx].length}mm</p>
           <p key="weight"> weight: {this.state.ants[idx].weight}mg</p>
           <p key="color"> color: {this.state.ants[idx].color.toLowerCase()}</p>
-          <p key="odds"> Win likelihood: {this.state.ants[idx].winLikelihood}</p>
+          <p key="odds"> Win likelihood: {this.state.ants[idx].winLikelihood.toFixed(4)*100}%</p>
           <img  className="ant-pic" key="pic" src={require(`../antPics/ant${idx}.png`)} alt={`ant-${idx}`}/>
         </li>
       )
