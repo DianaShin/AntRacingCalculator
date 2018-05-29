@@ -26,8 +26,6 @@ export default class AntRace extends React.Component {
     }).then(() => this.setState({ants}))
   }
 
-  click = (e) => console.log(this.state);
-
   calculateOdds = () => {
     this.setState({
       calculating: true,
@@ -35,10 +33,10 @@ export default class AntRace extends React.Component {
     });
     console.log(this.state);
     let antOddsCalculatedCount = 0;
-    Object.keys(this.state.ants).forEach((ant, idx) => {
+    Object.keys(this.state.ants).forEach(idx => {
       const callback = (likelihoodOfAntWinning) => {
         const newState = merge({}, this.state);
-        newState.ants[ant].winLikelihood = likelihoodOfAntWinning;
+        newState.ants[idx].winLikelihood = likelihoodOfAntWinning;
         antOddsCalculatedCount++;
         if (antOddsCalculatedCount === Object.keys(this.state.ants).length) {
           newState.calculated = true;
@@ -62,6 +60,19 @@ export default class AntRace extends React.Component {
     };
   }
 
+  reset = () => {
+    const ants = this.state.ants;
+    Object.keys(ants).forEach(idx => {
+      ants[idx].winLikelihood = 0;
+    });
+    this.setState({
+      ants: ants,
+      calculating: false,
+      calculated: false,
+      message: 'Want to calculate odds?'
+    })
+  }
+
   render() {
     let antsList =  Object.keys(this.state.ants).map(idx => {
       let odds = this.state.ants[idx].winLikelihood;
@@ -71,7 +82,7 @@ export default class AntRace extends React.Component {
           <p key="length"> length: {this.state.ants[idx].length}mm</p>
           <p key="weight"> weight: {this.state.ants[idx].weight}mg</p>
           <p key="color"> color: {this.state.ants[idx].color.toLowerCase()}</p>
-          <p key="odds"> Win likelihood: {this.state.ants[idx].winLikelihood.toFixed(4)*100}%</p>
+          <p key="odds"> Win likelihood: {Math.floor(this.state.ants[idx].winLikelihood.toFixed(4)*100)}%</p>
           <img  className="ant-pic" key="pic" src={require(`../antPics/ant${idx}.png`)} alt={`ant-${idx}`}/>
         </li>
       )
@@ -81,6 +92,9 @@ export default class AntRace extends React.Component {
       <div>
         <button className="calculate-button" onClick={this.calculateOdds}>
           calculate odds
+        </button>
+        <button className="reset-button" onClick={this.reset}>
+          reset
         </button>
         <ul>
           { antsList }
