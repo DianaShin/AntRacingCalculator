@@ -1,5 +1,6 @@
 import React from 'react';
 import { merge } from 'lodash';
+import Ant from './ant';
 
 export default class AntRace extends React.Component {
   constructor() {
@@ -75,16 +76,14 @@ export default class AntRace extends React.Component {
 
   render() {
     let antsList =  Object.keys(this.state.ants).map(idx => {
-      let odds = this.state.ants[idx].winLikelihood;
       return (
-        <li key={idx}>
-          <h2 className="ant-name" key="name">{this.state.ants[idx].name}</h2>
-          <p key="length"> length: {this.state.ants[idx].length}mm</p>
-          <p key="weight"> weight: {this.state.ants[idx].weight}mg</p>
-          <p key="color"> color: {this.state.ants[idx].color.toLowerCase()}</p>
-          <p key="odds"> Win likelihood: {Math.floor(this.state.ants[idx].winLikelihood.toFixed(4)*100)}%</p>
-          <img  className="ant-pic" key="pic" src={require(`../antPics/ant${idx}.png`)} alt={`ant-${idx}`}/>
-        </li>
+        <Ant  key={idx}
+              name={this.state.ants[idx].name}
+              length={this.state.ants[idx].length}
+              weight={this.state.ants[idx].weight}
+              color={this.state.ants[idx].color.toLowerCase()}
+              winLikelihood={Math.floor(this.state.ants[idx].winLikelihood.toFixed(4)*100)}
+              imageSrc={require(`../antPics/ant${idx}.png`)} />
       )
     })
 

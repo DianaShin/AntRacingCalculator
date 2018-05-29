@@ -50,6 +50,14 @@ h2.ant-name {
   padding: 0;
 }
 
+.ant-card {
+  display: flex;
+}
+
+.ant-info {
+  width: 25%;
+}
+
 .ant-pic {
-  width: 75px;
+  height: 75px;
 }
