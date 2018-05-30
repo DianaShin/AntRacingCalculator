@@ -74,6 +74,18 @@ export default class AntRace extends React.Component {
     })
   }
 
+  mostLikelyWinner = () => {
+    let mostLikely = 0;
+    let winnerIdx;
+    Object.keys(this.state.ants).forEach(idx => {
+      if (this.state.ants[idx].winLikelihood > mostLikely) {
+        mostLikely = this.state.ants[idx].winLikelihood;
+        winnerIdx = idx;
+      }
+    })
+    return winnerIdx
+  }
+
   render() {
     let antsList =  Object.keys(this.state.ants).map(idx => {
       return (
@@ -86,6 +98,8 @@ export default class AntRace extends React.Component {
               imageSrc={require(`../antPics/ant${idx}.png`)} />
       )
     })
+    let mostLikelyWinner = this.mostLikelyWinner();
+    console.log(this.mostLikelyWinner());
 
     return (
       <div>
@@ -95,9 +109,14 @@ export default class AntRace extends React.Component {
         <button className="reset-button" onClick={this.reset}>
           reset
         </button>
-        <ul>
-          { antsList }
-        </ul>
+        <div className="main">
+          <ul>
+            { antsList }
+          </ul>
+          <div>
+            And the most likely winner is... {mostLikelyWinner}
+          </div>
+        </div>
       </div>
     )
   }
