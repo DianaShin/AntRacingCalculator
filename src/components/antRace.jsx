@@ -76,14 +76,24 @@ export default class AntRace extends React.Component {
 
   mostLikelyWinner = () => {
     let mostLikely = 0;
-    let winnerIdx;
+    let winner;
     Object.keys(this.state.ants).forEach(idx => {
       if (this.state.ants[idx].winLikelihood > mostLikely) {
         mostLikely = this.state.ants[idx].winLikelihood;
-        winnerIdx = idx;
+        winner = idx;
       }
     })
-    return winnerIdx
+    console.log(this.state.ants[winner]);
+    if (typeof this.state.ants[winner] === 'undefined' ) {
+      return [];
+    } else {
+      return (
+        <div>
+          <p> {this.state.ants[winner].name}</p>
+          <img  className="ant-pic" key="winnerPic" src={require(`../antPics/ant${winner}.png`)} alt={this.state.ants[winner].name}/>
+        </div>
+      )
+    }
   }
 
   render() {
@@ -99,7 +109,6 @@ export default class AntRace extends React.Component {
       )
     })
     let mostLikelyWinner = this.mostLikelyWinner();
-    console.log(this.mostLikelyWinner());
 
     return (
       <div>
