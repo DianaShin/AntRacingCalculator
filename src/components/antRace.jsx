@@ -89,7 +89,7 @@ export default class AntRace extends React.Component {
       return (
         <div>
           <p> {this.state.ants[winner].name}</p>
-          <img  className="ant-pic" key="winnerPic" src={require(`../antPics/ant${winner}.png`)} alt={this.state.ants[winner].name}/>
+          <img  className="winner-pic" key="winnerPic" src={require(`../antPics/ant${winner}.png`)} alt={this.state.ants[winner].name}/>
         </div>
       )
     }
