@@ -83,7 +83,6 @@ export default class AntRace extends React.Component {
         winner = idx;
       }
     })
-    console.log(this.state.ants[winner]);
     if (typeof this.state.ants[winner] === 'undefined' ) {
       return [];
     } else {
@@ -112,6 +111,7 @@ export default class AntRace extends React.Component {
 
     return (
       <div>
+        <h2 className="title">Ant Racing Calculator</h2>
         <button className="calculate-button" onClick={this.calculateOdds}>
           calculate odds
         </button>
