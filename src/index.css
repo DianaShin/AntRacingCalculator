@@ -78,8 +78,21 @@ h2.ant-name {
 
 .ant-pic-run {
   height: 75px;
-  animation: shake 1s;
+  animation: shake 0.7s;
   animation-iteration-count: infinite;
+}
+
+.most-likely-winner {
+  background-color: white;
+  color: #FF1493;
+  border: 2px solid #FF1493;
+  font-family: 'Permanent Marker', cursive;
+  border-radius: 5px;
+  height: 50%;
+  padding: 15px;
+}
+.winner-text, .winner-name {
+  text-align: center;
 }
 
 .winner-pic {

@@ -8,8 +8,7 @@ export default class AntRace extends React.Component {
     this.state = {
       ants: {},
       calculated: false,
-      calculating: false,
-      message: ''
+      calculating: false
     }
   }
 
@@ -29,8 +28,7 @@ export default class AntRace extends React.Component {
 
   calculateOdds = () => {
     this.setState({
-      calculating: true,
-      message: 'Calcuating Odds!'
+      calculating: true
     });
     console.log(this.state);
     let antOddsCalculatedCount = 0;
@@ -69,8 +67,7 @@ export default class AntRace extends React.Component {
     this.setState({
       ants: ants,
       calculating: false,
-      calculated: false,
-      message: 'Want to calculate odds?'
+      calculated: false
     })
   }
 
@@ -88,8 +85,9 @@ export default class AntRace extends React.Component {
     } else {
       return (
         <div>
-          <p> {this.state.ants[winner].name}</p>
+          <p className="winner-name"> {this.state.ants[winner].name}</p>
           <img  className="winner-pic" key="winnerPic" src={require(`../antPics/ant${winner}.png`)} alt={this.state.ants[winner].name}/>
+          <p className="winner-chance">{Math.floor(this.state.ants[winner].winLikelihood.toFixed(4)*100)}% chance</p>
         </div>
       )
     }
@@ -124,8 +122,8 @@ export default class AntRace extends React.Component {
             { antsList }
           </ul>
           {this.state.calculated &&
-            <div>
-              And the most likely winner is... {mostLikelyWinner}
+            <div className="most-likely-winner">
+              <h2 className="winner-text">And the most likely winner is... {mostLikelyWinner} </h2>
             </div>}
         </div>
       </div>
