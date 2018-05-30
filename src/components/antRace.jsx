@@ -99,6 +99,7 @@ export default class AntRace extends React.Component {
     let antsList =  Object.keys(this.state.ants).map(idx => {
       return (
         <Ant  key={idx}
+              calculating={this.state.calculating}
               name={this.state.ants[idx].name}
               length={this.state.ants[idx].length}
               weight={this.state.ants[idx].weight}

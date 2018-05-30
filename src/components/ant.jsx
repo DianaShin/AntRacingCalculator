@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Ant = (props) => {
-  const {name, length, weight, color, winLikelihood, imageSrc} = props;
+  const {calculating, name, length, weight, color, winLikelihood, imageSrc} = props;
   return (
     <li className="ant-card" key={name}>
       <div className="ant-info">
@@ -11,9 +11,11 @@ const Ant = (props) => {
         <p key="color"> color: {color}</p>
         <p key="odds"> Win likelihood: {winLikelihood}%</p>
       </div>
-      <img  className="ant-pic" key="pic" src={imageSrc} alt={name}/>
+      <img  className={calculating? "ant-pic-run" : "ant-pic"} key="pic" src={imageSrc} alt={name}/>
     </li>
   )
 }
 
+//if the state is calculating and the ant's winLikelihood is not zero, put the classname as ant-pic-run
+//
 export default Ant;

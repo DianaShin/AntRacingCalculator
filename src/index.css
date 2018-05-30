@@ -76,6 +76,12 @@ h2.ant-name {
   height: 75px;
 }
 
+.ant-pic-run {
+  height: 75px;
+  animation: shake 1s;
+  animation-iteration-count: infinite;
+}
+
 .winner-pic {
   animation: shake 1s;
   animation-iteration-count: infinite;
