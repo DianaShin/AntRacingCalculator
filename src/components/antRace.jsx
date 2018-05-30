@@ -123,9 +123,10 @@ export default class AntRace extends React.Component {
           <ul>
             { antsList }
           </ul>
-          <div>
-            And the most likely winner is... {mostLikelyWinner}
-          </div>
+          {this.state.calculated &&
+            <div>
+              And the most likely winner is... {mostLikelyWinner}
+            </div>}
         </div>
       </div>
     )
