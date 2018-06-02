@@ -30,18 +30,16 @@ export default class AntRace extends React.Component {
     this.setState({
       calculating: true
     });
-    console.log(this.state);
     let antOddsCalculatedCount = 0;
     Object.keys(this.state.ants).forEach(idx => {
       const callback = (likelihoodOfAntWinning) => {
         const newState = merge({}, this.state);
         newState.ants[idx].winLikelihood = likelihoodOfAntWinning;
+        newState.ants = this.orderByWinLikelihood(newState.ants);
         antOddsCalculatedCount++;
         if (antOddsCalculatedCount === Object.keys(this.state.ants).length) {
           newState.calculated = true;
           newState.calculating = false;
-          newState.message = 'Odds are calculated!';
-          console.log(newState);
         }
         this.setState(newState);
       };
@@ -71,6 +69,23 @@ export default class AntRace extends React.Component {
     })
   }
 
+  orderByWinLikelihood = (antsObj = this.state.ants) => {
+    let antsArr = [];
+    Object.keys(antsObj).forEach(idx => {
+      antsArr.push(antsObj[idx])
+    })
+    antsArr.sort(function(a, b) {
+      return b.winLikelihood - a.winLikelihood;
+    })
+    let newAntsObj = {};
+    for (let i = 0; i < antsArr.length; i++) {
+      newAntsObj[i] = antsArr[i];
+    }
+    console.log(newAntsObj);
+    return newAntsObj;
+    //this.setState({ants: newAntsObj});
+  }
+
   mostLikelyWinner = () => {
     let mostLikely = 0;
     let winner;
@@ -94,6 +109,7 @@ export default class AntRace extends React.Component {
   }
 
   render() {
+
     let antsList =  Object.keys(this.state.ants).map(idx => {
       return (
         <Ant  key={idx}
@@ -106,6 +122,7 @@ export default class AntRace extends React.Component {
               imageSrc={require(`../antPics/ant${idx}.png`)} />
       )
     })
+
     let mostLikelyWinner = this.mostLikelyWinner();
 
     return (
@@ -119,7 +136,7 @@ export default class AntRace extends React.Component {
         </button>
         <div className="main">
           <ul>
-            { antsList }
+            {antsList}
           </ul>
           {this.state.calculated &&
             <div className="most-likely-winner">
