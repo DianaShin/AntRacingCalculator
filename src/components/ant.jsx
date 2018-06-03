@@ -11,7 +11,7 @@ const Ant = (props) => {
         <p key="color"> color: {color}</p>
         <p key="odds"> Win likelihood: {winLikelihood}%</p>
       </div>
-      <img  className={calculating? "ant-pic-run" : "ant-pic"} key="pic" src={imageSrc} alt={name}/>
+      <img  className={(calculating && winLikelihood === 0) ? "ant-pic-run" : "ant-pic"} key="pic" src={imageSrc} alt={name}/>
     </li>
   )
 }

@@ -22,8 +22,9 @@ export default class AntRace extends React.Component {
       data.data.ants.forEach((ant, idx) => {
         ants[idx] = ant;
         ants[idx].winLikelihood = 0;
+        ants[idx].imageSrc = require(`../antPics/ant${idx}.png`);
       })
-    }).then(() => this.setState({ants}))
+    }).then(() => this.setState({ants}));
   }
 
   calculateOdds = () => {
@@ -35,7 +36,7 @@ export default class AntRace extends React.Component {
       const callback = (likelihoodOfAntWinning) => {
         const newState = merge({}, this.state);
         newState.ants[idx].winLikelihood = likelihoodOfAntWinning;
-        newState.ants = this.orderByWinLikelihood(newState.ants);
+        newState.ants = this.reorderByWinLikelihood(newState.ants);
         antOddsCalculatedCount++;
         if (antOddsCalculatedCount === Object.keys(this.state.ants).length) {
           newState.calculated = true;
@@ -69,7 +70,7 @@ export default class AntRace extends React.Component {
     })
   }
 
-  orderByWinLikelihood = (antsObj = this.state.ants) => {
+  reorderByWinLikelihood = (antsObj) => {
     let antsArr = [];
     Object.keys(antsObj).forEach(idx => {
       antsArr.push(antsObj[idx])
@@ -81,9 +82,7 @@ export default class AntRace extends React.Component {
     for (let i = 0; i < antsArr.length; i++) {
       newAntsObj[i] = antsArr[i];
     }
-    console.log(newAntsObj);
     return newAntsObj;
-    //this.setState({ants: newAntsObj});
   }
 
   mostLikelyWinner = () => {
@@ -101,7 +100,7 @@ export default class AntRace extends React.Component {
       return (
         <div>
           <p className="winner-name"> {this.state.ants[winner].name}</p>
-          <img  className="winner-pic" key="winnerPic" src={require(`../antPics/ant${winner}.png`)} alt={this.state.ants[winner].name}/>
+          <img  className="winner-pic" key="winnerPic" src={this.state.ants[winner].imageSrc} alt={this.state.ants[winner].name}/>
           <p className="winner-chance">{Math.floor(this.state.ants[winner].winLikelihood.toFixed(4)*100)}% chance</p>
         </div>
       )
@@ -119,7 +118,7 @@ export default class AntRace extends React.Component {
               weight={this.state.ants[idx].weight}
               color={this.state.ants[idx].color.toLowerCase()}
               winLikelihood={Math.floor(this.state.ants[idx].winLikelihood.toFixed(4)*100)}
-              imageSrc={require(`../antPics/ant${idx}.png`)} />
+              imageSrc={this.state.ants[idx].imageSrc} />
       )
     })
 
