@@ -4,6 +4,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## [live link](https://dianashin.github.io/AntRacingCalculator/)
 
+Credit: The original svg file that was altered for the ant icons comes from: http://www.clker.com/clipart-white-ant.html.
+
 This is a very special app for purveyors of the competitive ant racing scene, who wish to view statistics related to competing ants before races take place.
 
 specifications:

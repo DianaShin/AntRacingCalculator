@@ -126,13 +126,37 @@ export default class AntRace extends React.Component {
 
     return (
       <div>
-        <h2 className="title">Ant Racing Calculator</h2>
-        <button className="calculate-button" onClick={this.calculateOdds}>
-          calculate odds
-        </button>
-        <button className="reset-button" onClick={this.reset}>
-          reset
-        </button>
+        <div className="header">
+          <div>
+            <h2 className="title">Ant Racing Calculator</h2>
+            <button className="calculate-button" onClick={this.calculateOdds}>
+              calculate odds
+            </button>
+            <button className="reset-button" onClick={this.reset}>
+              reset
+            </button>
+          </div>
+          <div className="about-me">
+            <h2 className="author">By Diana Shin</h2>
+            <ul className="about-item">
+              <li>
+                <a href="https://github.com/dianashin">
+                  <img src={require("../socialIcons/github-icon-01.png")} className="icon" />
+                </a>
+              </li>
+              <li>
+                <a href="https://www.linkedin.com/in/diana-shin/">
+                  <img src={require("../socialIcons/linkedin-icon2-01.png")} className="icon" />
+                </a>
+              </li>
+              <li>
+                <a href="https://dianashin.github.io/">
+                  <img src={require("../socialIcons/portfolio-icon-01.png")} className="icon" />
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
         <div className="main">
           <ul>
             {antsList}
